@@ -179,3 +179,9 @@ button:focus-visible,input:focus-visible{outline:3px solid #70a8ad;outline-offse
 .video-sticker strong{color:var(--gold)}
 @media(max-width:1000px){.video-section{padding-left:7vw;padding-right:7vw}}
 @media(max-width:700px){.video-section{padding:90px 25px}.video-grid{grid-template-columns:1fr;gap:34px;min-height:auto}.video-copy .display{font-size:clamp(65px,17vw,100px);margin:22px 0}.video-frame{width:min(82vw,340px);max-height:none}.video-sticker{left:0;top:-16px}}
+
+/* Opened letter: the paper sits above the envelope and the scene grows to fit all of it. */
+.envelope-scene.is-open{display:block;min-height:calc(var(--letter-h,760px) + 190px)}
+.envelope-scene.is-open .envelope{position:absolute;left:50%;bottom:0;transform:translateX(-50%)}
+.envelope-scene.is-open .letter-paper{top:auto;bottom:150px;min-height:0;max-height:none;transform:none;left:5%;right:5%;overflow:visible}
+@media(max-width:700px){.envelope-scene.is-open{min-height:calc(var(--letter-h,760px) + 150px)}.envelope-scene.is-open .letter-paper{bottom:110px;left:3%;right:3%}}

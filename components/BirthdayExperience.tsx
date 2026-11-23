@@ -154,6 +154,7 @@ function FireworksCanvas() {
 export default function BirthdayExperience() {
   const pianoRef = useRef<HTMLAudioElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const letterPaperRef = useRef<HTMLDivElement>(null);
   const pianoPausedForVideo = useRef(false);
   const [entered, setEntered] = useState(false);
   const [stage, setStage] = useState<"invitation" | "confession" | "story">("invitation");
@@ -168,6 +169,18 @@ export default function BirthdayExperience() {
   const [transitioning, setTransitioning] = useState(false);
   const transitionTimers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const reducedMotion = useReducedMotion();
+
+  // Keep the opened envelope exactly as tall as the letter, however long the letter is.
+  useEffect(() => {
+    const paper = letterPaperRef.current;
+    const scene = paper?.closest<HTMLElement>(".envelope-scene");
+    if (!paper || !scene || !letterOpen) return;
+    const sync = () => scene.style.setProperty("--letter-h", `${paper.offsetHeight}px`);
+    sync();
+    const observer = new ResizeObserver(sync);
+    observer.observe(paper);
+    return () => observer.disconnect();
+  }, [letterOpen]);
 
   useEffect(() => {
     if (entered) return;
@@ -252,7 +265,7 @@ export default function BirthdayExperience() {
 
       {c.sections.video && <section className="section video-section" id="video"><ConfettiField /><div className="video-grid"><Reveal className="video-copy"><span className="section-index"><SparkleMark small /> 06 <i /> THE GIRL OF THE HOUR</span><h2 className="display">Look at<br /><em>you.</em></h2><p>{c.video.caption}</p><span className="video-note">press play, birthday girl ↘</span></Reveal><Reveal className="video-stage" delay={0.1}><div className="video-frame"><video ref={videoRef} src={c.video.src} poster={c.video.poster || undefined} controls playsInline preload="metadata" onPlay={onVideoPlay} onPause={onVideoStop} onEnded={onVideoStop} /></div><span className="video-sticker">PLAY ME<br /><strong>{c.recipientName.toUpperCase()}&apos;S MOMENT</strong></span></Reveal></div></section>}
 
-      {c.sections.letter && <section className="section letter-section" id="letter"><ConfettiField /><div className="letter-grid"><Reveal className="letter-intro"><span className="section-index"><SparkleMark small /> 07 <i /> A NOTE FROM ME</span><h2 className="display">I wrote<br /><em>something</em><br />for you.</h2><p>Some feelings deserve more than a quick message.</p><button type="button" className="button button--coral" onClick={() => setLetterOpen(true)} disabled={letterOpen}><Heart size={17} fill="currentColor" /> {letterOpen ? "Letter opened" : "Open your letter"} <ArrowRight size={19} /></button></Reveal><Reveal className={`envelope-scene ${letterOpen ? "is-open" : ""}`} delay={0.15}><div className="envelope-glow" /><div className="envelope"><div className="envelope-back" /><div className="letter-paper"><span className="eyebrow coral">FOR {c.recipientName.toUpperCase()} · WITH LOVE</span><h3 className="serif">{c.letter.salutation}</h3>{c.letter.paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}<strong className="serif">{c.letter.signoff}</strong></div><div className="envelope-flap" /><div className="envelope-front" /><div className="wax-seal">♥</div></div>{!letterOpen && <button type="button" className="envelope-tap" onClick={() => setLetterOpen(true)} aria-label="Open your letter">tap to open ✦</button>}</Reveal></div></section>}
+      {c.sections.letter && <section className="section letter-section" id="letter"><ConfettiField /><div className="letter-grid"><Reveal className="letter-intro"><span className="section-index"><SparkleMark small /> 07 <i /> A NOTE FROM ME</span><h2 className="display">I wrote<br /><em>something</em><br />for you.</h2><p>Some feelings deserve more than a quick message.</p><button type="button" className="button button--coral" onClick={() => setLetterOpen(true)} disabled={letterOpen}><Heart size={17} fill="currentColor" /> {letterOpen ? "Letter opened" : "Open your letter"} <ArrowRight size={19} /></button></Reveal><Reveal className={`envelope-scene ${letterOpen ? "is-open" : ""}`} delay={0.15}><div className="envelope-glow" /><div className="envelope"><div className="envelope-back" /><div className="letter-paper" ref={letterPaperRef}><span className="eyebrow coral">FOR {c.recipientName.toUpperCase()} · WITH LOVE</span><h3 className="serif">{c.letter.salutation}</h3>{c.letter.paragraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}<strong className="serif">{c.letter.signoff}</strong></div><div className="envelope-flap" /><div className="envelope-front" /><div className="wax-seal">♥</div></div>{!letterOpen && <button type="button" className="envelope-tap" onClick={() => setLetterOpen(true)} aria-label="Open your letter">tap to open ✦</button>}</Reveal></div></section>}
 
       {c.sections.gift && <section className="section gift-section" id="gift"><div className="gift-stars" aria-hidden="true">✦ ✧ ✦ ✳ ✦</div><Reveal className="gift-content"><span className="section-index gold"><SparkleMark small /> 08 <i /> ONE LAST THING</span><h2 className="display">One more surprise<br /><em>awaits you.</em></h2><p>Go on, it has your name all over it.</p><button type="button" className={`gift-box ${giftState !== "closed" ? "is-opening" : ""} ${giftState === "open" ? "is-open" : ""}`} onClick={openGift} aria-label="Open your birthday gift" disabled={giftState !== "closed"}><span className="gift-lid"><span /></span><span className="gift-body"><span /></span><span className="gift-bow">♡</span><span className="gift-light" /></button><span className="gift-prompt">{giftState === "closed" ? "TAP THE GIFT TO OPEN" : giftState === "opening" ? "A LITTLE MAGIC..." : "SURPRISE!"}</span><AnimatePresence>{giftState === "open" && <motion.div className="gift-reveal" initial={{ opacity: 0, y: 25, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.7 }} role="status"><SparkleMark /><p className="serif">{c.surpriseMessage}</p></motion.div>}</AnimatePresence></Reveal></section>}
 
