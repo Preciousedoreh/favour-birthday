@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-// A piano arrangement of the familiar Happy Birthday melody for Amaka. Run with:
+// A piano arrangement of the familiar Happy Birthday melody for Favour. Run with:
 // node scripts/generate-birthday-piano.mjs
 const sampleRate = 32000;
 const eighth = 60 / 96 / 2;

@@ -52,12 +52,12 @@ try {
 
   if (await page.locator("#facts").count() !== 1) failures.push("Personal facts section is missing");
   const revealedFacts = new Set();
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 9; i++) {
     await page.getByRole("button", { name: i === 0 ? /Reveal a fact/i : /Next little fact/i }).click();
     await page.waitForTimeout(780);
     revealedFacts.add(await page.locator(".fact-message").innerText());
   }
-  if (revealedFacts.size !== 7) failures.push(`Expected seven distinct facts, found ${revealedFacts.size}`);
+  if (revealedFacts.size !== 9) failures.push(`Expected nine distinct facts, found ${revealedFacts.size}`);
   if (!await page.getByRole("button", { name: /Read them again/i }).isVisible()) failures.push("Fact list did not reach the last item");
   await page.screenshot({ path: "preview-facts.png" });
 
@@ -94,8 +94,8 @@ try {
     return paper.top >= section.top && paper.bottom <= section.bottom;
   });
   if (!desktopLetterFits) failures.push("Opened letter does not fit its desktop section");
-  if (!await page.getByText("Happy birthday, beautiful ♥").isVisible()) failures.push("New letter signoff is missing");
-  if (!await page.locator(".letter-paper p").first().textContent().then(text => text.startsWith("Honestly, I don’t think you fully understand"))) failures.push("New personal letter is missing");
+  if (!await page.getByText("I love you. ❤️").isVisible()) failures.push("Letter signoff is missing");
+  if (!await page.locator(".letter-paper p").first().textContent().then(text => text.startsWith("Another year around the sun"))) failures.push("New personal letter is missing");
   await page.screenshot({ path: "preview-letter.png" });
   await page.getByRole("button", { name: /Open your birthday gift/i }).click();
   await page.getByText(/If I had to choose again/i).waitFor({ state: "visible" });

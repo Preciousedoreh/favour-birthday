@@ -1,4 +1,4 @@
-# A birthday for Amaka
+# A birthday for Favour
 
 An interactive birthday website built with Next.js App Router, React, TypeScript, Tailwind CSS, Motion, and Lucide icons. The cake illustration is included; no personal photographs or external services are needed.
 
@@ -27,11 +27,11 @@ After `npm run build`, `npm run start` serves the exported production site at `h
 
 ## Personalize
 
-Edit [`birthday.config.ts`](./birthday.config.ts) to change Amaka's name, romantic messages, six flip cards, seven revealable facts, letter, gift message, theme colors, or enabled sections. The site has no countdown, photo gallery, or sound control.
+Edit [`birthday.config.ts`](./birthday.config.ts) to change Favour's name, romantic messages, six flip cards, nine revealable facts, letter, birthday video (`public/video/birthday-video.mp4`), gift message, theme colors, or enabled sections. The site has no countdown, photo gallery, or sound control.
 
 The generated cake illustration lives at `public/images/birthday-still-life.png`. The interactive cake, candles, envelope, gift, confetti, and fireworks are built with code.
 
-A rhythmic piano arrangement of the familiar **Happy Birthday** tune starts when Amaka presses **Begin your birthday surprise** and loops through the experience. Its audio file is `public/audio/bukky-birthday-tune.wav`. To regenerate it after editing the score, run `node scripts/generate-birthday-piano.mjs`.
+A rhythmic piano arrangement of the familiar **Happy Birthday** tune starts when Favour presses **Begin your birthday surprise** and loops through the experience. Its audio file is `public/audio/bukky-birthday-tune.wav`. To regenerate it after editing the score, run `node scripts/generate-birthday-piano.mjs`.
 
 ## Deploy to Netlify when ready
 

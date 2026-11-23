@@ -91,7 +91,7 @@ button:focus-visible,input:focus-visible{outline:3px solid #70a8ad;outline-offse
   .invitation--gate .invitation-art{min-height:105px}
 }
 
-/* A handwritten list followed by Amaka's six personal notes. */
+/* A handwritten list followed by Favour's six personal notes. */
 .facts-section{display:grid;align-items:center;padding:10vh clamp(28px,11vw,210px);background:#352334;color:var(--ivory)}
 .facts-section .confetti-field{opacity:.15}
 .facts-grid{position:relative;z-index:2;display:grid;grid-template-columns:47% 53%;align-items:center;gap:3%}
@@ -159,3 +159,23 @@ button:focus-visible,input:focus-visible{outline:3px solid #70a8ad;outline-offse
 @keyframes balloonFall{from{transform:translate3d(0,-25vh,0) rotate(-8deg)}50%{transform:translate3d(calc(var(--balloon-drift)*.5),55vh,0) rotate(8deg)}to{transform:translate3d(var(--balloon-drift),130vh,0) rotate(-8deg)}}
 @media(max-width:700px){.reason-card,.reason-card--long{height:490px}.envelope-scene.is-open{min-height:1270px}.finale h2.display{font-size:clamp(38px,10vw,56px)}.falling-balloon{opacity:.34}}
 @media(prefers-reduced-motion:reduce){.falling-balloons{display:none}}
+
+/* Longer personal notes: smaller, more readable type than the prompt line. */
+.fact-message p.fact-text{font-size:clamp(20px,1.75vw,32px);line-height:1.28;letter-spacing:-.01em;text-wrap:pretty}
+@media(max-width:1000px){.fact-message p.fact-text{font-size:clamp(19px,2.2vw,26px)}}
+@media(max-width:700px){.fact-message p.fact-text{font-size:clamp(18px,4.8vw,24px)}}
+
+/* Birthday video: portrait frame beside a short intro. */
+.video-section{background:radial-gradient(circle at 70% 45%,#fff3d1,#ffe6ae 70%);padding:12vh clamp(28px,11vw,210px);overflow:hidden}
+.video-grid{position:relative;z-index:2;display:grid;grid-template-columns:52% 48%;gap:3%;align-items:center;min-height:75vh}
+.video-copy .display{font-size:clamp(80px,9.2vw,165px);margin:30px 0}
+.video-copy em{color:var(--coral)}
+.video-copy p{font-size:clamp(18px,1.4vw,24px);line-height:1.6;color:#7b6470;max-width:510px;margin:0 0 30px}
+.video-note{display:inline-block;font:italic 700 24px/1 var(--font-display);color:var(--coral);transform:rotate(-4deg)}
+.video-stage{position:relative;display:grid;place-items:center}
+.video-frame{position:relative;width:min(100%,380px);aspect-ratio:9/16;max-height:78vh;border-radius:30px;overflow:hidden;background:var(--plum);border:8px solid var(--ivory);box-shadow:0 30px 70px #36233540,0 0 0 2px var(--coral);transform:rotate(2deg)}
+.video-frame video{width:100%;height:100%;object-fit:cover;display:block;background:var(--plum)}
+.video-sticker{position:absolute;left:max(-6px,calc(50% - 250px));top:6%;z-index:3;transform:rotate(-8deg);padding:14px 18px;border-radius:50%;background:var(--coral);color:var(--ivory);font-size:11px;font-weight:900;letter-spacing:.12em;text-align:center;line-height:1.5;box-shadow:0 12px 30px #f55b5955}
+.video-sticker strong{color:var(--gold)}
+@media(max-width:1000px){.video-section{padding-left:7vw;padding-right:7vw}}
+@media(max-width:700px){.video-section{padding:90px 25px}.video-grid{grid-template-columns:1fr;gap:34px;min-height:auto}.video-copy .display{font-size:clamp(65px,17vw,100px);margin:22px 0}.video-frame{width:min(82vw,340px);max-height:none}.video-sticker{left:0;top:-16px}}
